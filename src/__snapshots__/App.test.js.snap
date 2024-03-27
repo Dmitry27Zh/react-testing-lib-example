@@ -1,5 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TEST_APP renders learn react components 1`] = `
+<input
+  placeholder="input value..."
+  type="text"
+/>
+`;
+
 exports[`renders learn react components 1`] = `
 <input
   placeholder="input value..."
