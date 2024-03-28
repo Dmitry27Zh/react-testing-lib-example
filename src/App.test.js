@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import App from './App'
 
 describe('TEST_APP', () => {
@@ -21,5 +21,25 @@ describe('TEST_APP', () => {
     expect(helloWorldElem2).toBeInTheDocument()
     screen.debug()
     expect(helloWorldElem2).toHaveStyle({ color: 'red' })
+  })
+  test('click event', () => {
+    render(<App />)
+    const btn = screen.getByTestId('toggle-btn')
+    expect(screen.queryByTestId('toggle-elem')).toBeNull()
+    fireEvent.click(btn)
+    expect(screen.queryByTestId('toggle-elem')).toBeInTheDocument()
+    fireEvent.click(btn)
+    expect(screen.queryByTestId('toggle-elem')).toBeNull()
+  })
+  test('input event', () => {
+    render(<App />)
+    const input = screen.getByPlaceholderText(/input value.../i)
+    const valueElem = screen.queryByTestId('value-elem')
+    const testValue = 'afafsfs'
+    expect(valueElem).toContainHTML('')
+    fireEvent.input(input, {
+      target: { value: testValue },
+    })
+    expect(valueElem).toContainHTML(testValue)
   })
 })
